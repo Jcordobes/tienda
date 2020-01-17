@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const apiRoutes = require('./routes.js');
 
 const app = express();
 
@@ -8,12 +9,16 @@ mongoose.connect ("mongodb://localhost:27017/tienda", { useNewUrlParser: true } 
     .catch( err => console.log("Error al conectar a BD: " + err
     ) );
 
-app.get("/", (req, res) => {
-    res.send("www.youtube.es")
-});
+// app.get("/", (req, res) => {
+//     res.send("www.youtube.es")
+// });
 
-app.get("/hola", (req, res) =>
-    res.send("www.youtube.es www.youtube.es")
-);
+// app.get("/hola", (req, res) =>
+//     res.send("Dirección de Youtube: www.youtube.es")
+// );
+
+app.use('/api', apiRoutes);
+app.use(express.json());
+
 
 app.listen(3000, () => console.log("Servidor iniciado..."));
